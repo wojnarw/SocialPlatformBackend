@@ -1,6 +1,7 @@
 package com.twitterkiller.demo.entity;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;
 
 import java.sql.Date;
@@ -14,15 +15,16 @@ public class SocialNetworkPost {
     private Date postDate;
     @Column
     @Size(min = 3, max = 64)
+    @NotBlank
     private String author;
     @Column
     @Size(min = 3, max = 65000)
+    @NotBlank
     private String content;
     @Column
     private int viewCount;
 
     public SocialNetworkPost(String author, String content) {
-//        this.postDate = new Date(System.currentTimeMillis());
         this.author = author;
         this.content = content;
         this.viewCount = 0;
