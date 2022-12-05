@@ -1,7 +1,7 @@
 package com.twitterkiller.demo.controller;
 
 import com.twitterkiller.demo.entity.SocialNetworkPost;
-import com.twitterkiller.demo.repository.SocialNetworkPostRepository;
+import com.twitterkiller.demo.service.SocialNetworkPostServiceDb;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -12,21 +12,24 @@ import java.util.List;
 @RestController
 @RequestMapping("/api")
 public class MainController {
-    private final SocialNetworkPostRepository postRepository;
-//    private final PostJpaRepository postJpaRepository;
+    private final SocialNetworkPostServiceDb postRepository;
 
     @Autowired
-    public MainController(SocialNetworkPostRepository postRepository) {
+    public MainController(SocialNetworkPostServiceDb postRepository) {
         this.postRepository = postRepository;
     }
-//    public MainController(PostJpaRepository postJpaRepository) {
-//        this.postJpaRepository = postJpaRepository;
-//    }
-
 
     @GetMapping("/posts")
     public List<SocialNetworkPost> getPosts() {
         return postRepository.findAll();
+    }
+
+    @GetMapping("/posts/p/{num}")
+    public List<SocialNetworkPost> getPage(@PathVariable int num) {
+        int pageSize = 20;
+        int pageNumber = num - 1; // page 1 should be the first page
+        if(pageNumber < 0) return null;
+        return postRepository.getPostsPage(pageSize, pageNumber);
     }
 
     @GetMapping("/top")
@@ -55,7 +58,7 @@ public class MainController {
 
     @GetMapping("/post/{id}")
     public SocialNetworkPost getPost(@PathVariable Long id) {
-        SocialNetworkPost post = postRepository.findById(id).orElse(null);
+        SocialNetworkPost post = postRepository.findById(id);
         if(post != null) {
             post.setViewCount(post.getViewCount() + 1);
             postRepository.save(post);
@@ -65,6 +68,6 @@ public class MainController {
 
     @GetMapping("/author/{name}")
     public List<SocialNetworkPost> getPostsByAuthor(@PathVariable String name) {
-        return postRepository.getReferenceByAuthor(name);
+        return postRepository.getLastTenByAuthor(name);
     }
 }
