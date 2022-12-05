@@ -10,7 +10,7 @@ public class SocialNetworkPost {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    @Column
+    @Column(columnDefinition = "DATETIME DEFAULT NOW()")
     private Date postDate;
     @Column
     @Size(min = 3, max = 64)
@@ -22,7 +22,7 @@ public class SocialNetworkPost {
     private int viewCount;
 
     public SocialNetworkPost(String author, String content) {
-        this.postDate = new Date(System.currentTimeMillis());
+//        this.postDate = new Date(System.currentTimeMillis());
         this.author = author;
         this.content = content;
         this.viewCount = 0;
@@ -52,11 +52,11 @@ public class SocialNetworkPost {
         return author;
     }
 
-    public long getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(long id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
