@@ -2,6 +2,7 @@
 
 Endpoints:  
 /api/posts - all posts  
+/api/posts/last - last 20 posts  
 /api/posts/p/1 - paginated posts  
 /api/top - top 10 posts by views  
 /api/author - last 10 posts by author  
