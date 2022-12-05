@@ -13,16 +13,16 @@ import java.util.List;
 @RestController
 @RequestMapping("/api")
 public class MainController {
-    private final SocialNetworkPostServiceDb postRepository;
+    private final SocialNetworkPostServiceDb postServiceDb;
 
     @Autowired
-    public MainController(SocialNetworkPostServiceDb postRepository) {
-        this.postRepository = postRepository;
+    public MainController(SocialNetworkPostServiceDb postServiceDb) {
+        this.postServiceDb = postServiceDb;
     }
 
     @GetMapping("/posts")
     public List<SocialNetworkPost> getPosts() {
-        return postRepository.findAll();
+        return postServiceDb.findAll();
     }
 
     @GetMapping("/posts/p/{num}")
@@ -30,12 +30,12 @@ public class MainController {
         int pageSize = 20;
         int pageNumber = num - 1; // page 1 should be the first page
         if (pageNumber < 0) return null;
-        return postRepository.getPostsPage(pageSize, pageNumber);
+        return postServiceDb.getPostsPage(pageSize, pageNumber);
     }
 
     @GetMapping("/top")
     public List<SocialNetworkPost> showTop10Posts() {
-        return postRepository.findTop10ByOrderByViewCountDesc();
+        return postServiceDb.findTop10ByOrderByViewCountDesc();
     }
 
     @PostMapping("/post/new")
@@ -51,7 +51,7 @@ public class MainController {
             return null;
         }
 
-        SocialNetworkPost postWithAllData = postRepository.save(post);
+        SocialNetworkPost postWithAllData = postServiceDb.save(post);
         return postWithAllData;
     }
 
@@ -70,22 +70,22 @@ public class MainController {
                 new SocialNetworkPost("some_other_user", "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum", 99),
                 new SocialNetworkPost("00000", "incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum", 1)
         );
-        postRepository.saveAll(posts);
+        postServiceDb.saveAll(posts);
         return "dummy data inserted! Length: " + posts.size();
     }
 
     @GetMapping("/post/{id}")
     public SocialNetworkPost getPost(@PathVariable Long id) {
-        SocialNetworkPost post = postRepository.findById(id);
+        SocialNetworkPost post = postServiceDb.findById(id);
         if (post != null) {
             post.setViewCount(post.getViewCount() + 1);
-            postRepository.save(post);
+            postServiceDb.save(post);
         }
         return post;
     }
 
     @GetMapping("/author/{name}")
     public List<SocialNetworkPost> getPostsByAuthor(@PathVariable String name) {
-        return postRepository.getLastTenByAuthor(name);
+        return postServiceDb.getLastTenByAuthor(name);
     }
 }
