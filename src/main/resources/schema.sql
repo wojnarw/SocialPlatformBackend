@@ -1,4 +1,4 @@
-create table posts (
+CREATE TABLE IF NOT EXISTS posts (
     id bigint not null auto_increment,
     author varchar(64) not null,
     content text(65000) not null,
