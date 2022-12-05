@@ -1,4 +1,11 @@
-INSERT INTO posts (author,
-                   content)
-VALUES ('autor'
-    'zawartosc');
+INSERT INTO posts (author, content, post_date, view_count) VALUES ('autor1', 'zawartosc1', '2022-12-01', 1);
+INSERT INTO posts (author, content, post_date, view_count) VALUES ('autor2', 'zawartosc2', '2022-12-02', 2);
+INSERT INTO posts (author, content, post_date, view_count) VALUES ('autor3', 'zawartosc3', '2022-12-03', 3);
+INSERT INTO posts (author, content, post_date, view_count) VALUES ('autor4', 'zawartosc4', '2022-12-04', 4);
+INSERT INTO posts (author, content, post_date, view_count) VALUES ('autor5', 'zawartosc5', '2022-12-05', 5);
+INSERT INTO posts (author, content, post_date, view_count) VALUES ('autor6', 'zawartosc6', '2022-12-06', 6);
+INSERT INTO posts (author, content, post_date, view_count) VALUES ('autor7', 'zawartosc7', '2022-12-07', 7);
+INSERT INTO posts (author, content, post_date, view_count) VALUES ('autor8', 'zawartosc8', '2022-12-08', 8);
+INSERT INTO posts (author, content, post_date, view_count) VALUES ('autor9', 'zawartosc9', '2022-12-09', 9);
+INSERT INTO posts (author, content, post_date, view_count) VALUES ('autor10', 'zawartosc10', '2022-12-10', 10);
+INSERT INTO posts (author, content, post_date, view_count) VALUES ('autor11', 'zawartosc11', '2022-12-11', 11);
