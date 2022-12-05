@@ -13,6 +13,9 @@ import java.util.Set;
 
 public interface SocialNetworkPostRepository extends JpaRepository<SocialNetworkPost, Long> {
 
+    List<SocialNetworkPost> getReferenceByAuthor(String author);
+    List<SocialNetworkPost> findTop10ByOrderByViewCountDesc();
+//    List<SocialNetworkPost> findTop10ByOrderByViewCountDescContentLike();
 //    @Query("select * from posts where content like '%:text%' limit 10")
 //    List<SocialNetworkPost> findByName(@Param("text") String text);
 //    int countAllByAuthor(String author);
