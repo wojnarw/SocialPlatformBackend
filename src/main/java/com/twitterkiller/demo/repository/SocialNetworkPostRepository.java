@@ -11,17 +11,12 @@ import org.springframework.stereotype.Repository;
 import java.util.List;
 import java.util.Set;
 
-@Repository
 public interface SocialNetworkPostRepository extends JpaRepository<SocialNetworkPost, Long> {
-    SocialNetworkPost findByName(String text);
-    @Query("select c from SocialNetworkPost c join fetch c.user u")
-    List<SocialNetworkPost> find10By
 
-    @Query("select c from SocialNetworkPost c left join fetch c.user left join fetch c.inputFields where c.id = :id")
-        //  join fetch t.publications p")
-    SocialNetworkPost findOneByIdWithAllData(@Param("id") Long id);
-    int countAllByAuthor(String author);
-    SocialNetworkPost findOneByIdAndUser(String id);
-    Page<SocialNetworkPost> findAllByUser(String author, Pageable pageable);
-    List<SocialNetworkPost> findAllByUser(String author);
+//    @Query("select * from posts where content like '%:text%' limit 10")
+//    List<SocialNetworkPost> findByName(@Param("text") String text);
+//    int countAllByAuthor(String author);
+//    Page<SocialNetworkPost> findAllByAuthor(String author, Pageable pageable);
+//    List<SocialNetworkPost> findAllByAuthor(String author);
+
 }
