@@ -13,6 +13,8 @@ public interface SocialNetworkPostRepository extends JpaRepository<SocialNetwork
 
     List<SocialNetworkPost> findTop10ByOrderByViewCountDesc();
 
+    List<SocialNetworkPost> findTop20ByOrderByPostDateDesc();
+
     List<SocialNetworkPost> findAllByAuthorOrderByViewCount(String author);
 
     List<SocialNetworkPost> findAllByAuthor(String author);

@@ -12,6 +12,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/api")
+@CrossOrigin(origins = "http://localhost:3000/")
 public class MainController {
     private final SocialNetworkPostServiceDb postServiceDb;
 
@@ -23,6 +24,11 @@ public class MainController {
     @GetMapping("/posts")
     public List<SocialNetworkPost> getPosts() {
         return postServiceDb.findAll();
+    }
+
+    @GetMapping("/posts/last")
+    public List<SocialNetworkPost> getLast20Posts() {
+        return postServiceDb.findTop20ByOrderByPostDateDesc();
     }
 
     @GetMapping("/posts/p/{num}")

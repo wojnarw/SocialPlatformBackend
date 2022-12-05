@@ -32,6 +32,11 @@ public class SocialNetworkPostServiceDb implements SocialNetworkPostService {
     }
 
     @Override
+    public List<SocialNetworkPost> findTop20ByOrderByPostDateDesc() {
+        return this.postRepository.findTop20ByOrderByPostDateDesc();
+    }
+
+    @Override
     public SocialNetworkPost findById(Long id) {
         return this.postRepository.findById(id).orElse(null);
     }

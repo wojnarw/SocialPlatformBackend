@@ -8,6 +8,7 @@ public interface SocialNetworkPostService {
 
     List<SocialNetworkPost> getReferenceByAuthor(String author);
     List<SocialNetworkPost> findTop10ByOrderByViewCountDesc();
+    List<SocialNetworkPost> findTop20ByOrderByPostDateDesc();
     List<SocialNetworkPost> findAllByAuthorOrderByViewCount(String author);
     SocialNetworkPost findById(Long id);
     SocialNetworkPost save(SocialNetworkPost post);
